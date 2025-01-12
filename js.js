@@ -1,6 +1,7 @@
 let productGrid = document.getElementById('product-grid')
 let productsArray = []
-let url = 'https://my-json-server.typicode.com/RoboUmanAdm/market'
+let url = 'https://my-json-server.typicode.com/RoboUmanAdm/market/products
+'
 
 
 fetch(url + '/products')
