@@ -2,28 +2,31 @@ let productGrid = document.getElementById('product-grid')
 let productsArray = []
 let url = 'https://my-json-server.typicode.com/RoboUmanAdm/market'
 
-fetch(url + '/product')
-    .then(async function (response){
+
+fetch(url + '/products')
+    .then(async function (response) {
         let product = await response.json()
-        productGrid.innerHTML = null
+        productGrid.innerHTML = null // Очищення контейнера
         product.forEach(p => {
-            productsArray.push(p)
+            productsArray.push(p) // Зберігаємо продукт у масив
             let pElem = document.createElement('div')
             pElem.classList.add('product')
-            pElem.innerHTML=`
-            <h2 class='product-name'>${p.name}</h2>
-            <img class='product-photo' src='${p.photo_url}'>
-            <p class='product-price'>${p.price}</p>
-            <p class='product-description'>${p.description}</p>
-            <a href=''>sell profile</a>
-            <button>buy</button>
+            pElem.innerHTML = `
+                <h2 class='product-name'>${p.name}</h2>
+                <img class='product-photo' src='${p.photo_url}' alt='${p.name}'>
+                <p class='product-price'>Ціна: ${p.price} грн</p>
+                <p class='product-description'>${p.description}</p>
+                <a href='#'>Профіль продавця</a>
+                <button>Купити</button>
             `
-        });
+            productGrid.appendChild(pElem) // Додаємо продукт у DOM
+        })
     })
-    
+    .catch(error => {
+        console.error('Помилка:', error)
+    })
 
 
-
-function fun(){
-
+function fun() {
+    console.log('Функція виконується')
 }
