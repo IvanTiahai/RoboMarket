@@ -5,10 +5,13 @@ let url = 'https://my-json-server.typicode.com/RoboUmanAdm/market'
 
 fetch(url + '/products')
     .then(async function (response) {
-        let product = await response.json()
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`); // логування
+        }
+        let products = await response.json();
         productGrid.innerHTML = null // Очищення контейнера
         product.forEach(p => {
-            productsArray.push(p) // Зберігаємо продукт у масив
+            productsArray.push(p) 
             let pElem = document.createElement('div')
             pElem.classList.add('product')
             pElem.innerHTML = `
@@ -23,10 +26,10 @@ fetch(url + '/products')
         })
     })
     .catch(error => {
-        console.error('Помилка:', error)
+        console.error('Помилка завантаження', error)
     })
 
 
 function fun() {
-    console.log('Функція виконується')
+    console.log('Функція')
 }
